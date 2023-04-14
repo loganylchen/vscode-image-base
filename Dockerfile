@@ -3,7 +3,7 @@ FROM ubuntu:22.04
 ENV PATH=/opt/bin/:$PATH
 ENV DEBIAN_FRONTEND=noninteractive
 
-
+WORKDIR /opt/bin
 
 RUN apt update -y && \
     apt install -y \
