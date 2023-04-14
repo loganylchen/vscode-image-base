@@ -3,4 +3,23 @@ Most of the time, I needed an independent environment for different projects. Th
 
 # Versions
 
-- v0.0.1: The initial image
+
+## v0.0.2
+
+### Added
+
+#### Python
+
+- jupyter==1.0.0 
+- ipykernel==6.22.0
+
+#### R
+
+- BiocManager
+- devtools
+- languageserver
+- IRkernel
+
+## v0.0.1
+
+The initial image
