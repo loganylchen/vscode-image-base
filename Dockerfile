@@ -11,5 +11,12 @@ RUN apt update -y && \
     r-base libcurl4-openssl-dev libssl-dev \
     libxml2-dev libproj-dev libfontconfig1-dev git liblz4-dev libzstd-dev \
     libharfbuzz-dev libfribidi-dev build-essential cmake && \
+    pip3 install jupyter==1.0.0 && \
+    pip3 install ipykernel==6.22.0 && \
+    Rscript -e "install.packages(c('BiocManager','devtools','languageserver','IRkernel'))"  && \
     rm -rf /tmp/*
+
+
+
+
 
