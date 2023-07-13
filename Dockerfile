@@ -6,6 +6,12 @@ ENV DEBIAN_FRONTEND=noninteractive
 WORKDIR /opt/bin
 
 RUN apt update -y && \
+    apt upgrade && \
+    apt install -y dirmngr gnupg apt-transport-https ca-certificates software-properties-common && \
+    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9 && \
+    wget -O- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | sudo gpg --dearmor | sudo tee /usr/share/keyrings/cran.gpg && \
+    echo deb [signed-by=/usr/share/keyrings/cran.gpg] https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/ | sudo tee /etc/apt/sources.list.d/cran.list && \
+    apt update && \
     apt install -y \
     locales python3 python3-dev python3-pip \
     r-base libcurl4-openssl-dev libssl-dev curl wget libpoppler-cpp-dev  libgsl-dev \
