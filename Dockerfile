@@ -20,7 +20,7 @@ RUN apt update -y && \
     libharfbuzz-dev libfribidi-dev build-essential cmake && \
     sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && \
     locale-gen && \
-    update-alternatives --install /usr/bin/python python /usr/bin/python3 && \
+    update-alternatives --install /usr/bin/python python /usr/bin/python3 1 && \
     pip3 install jupyter==1.0.0 && \
     pip3 install ipykernel==6.22.0 && \
     Rscript -e "install.packages(c('BiocManager','devtools','languageserver','IRkernel'))"  && \
