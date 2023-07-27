@@ -10,6 +10,20 @@ Most of the time, I needed an independent environment for different projects. Th
 
 # Versions
 
+## v0.0.3
+
+- link the python3 to python, so we could call python directly to use python3 in the environment.
+- Upgrade R from lower version to the latest version (4.3.3)
+- Change the language settings. So there will not be warnings below:
+```
+1: Setting LC_CTYPE failed, using "C"
+2: Setting LC_COLLATE failed, using "C"
+3: Setting LC_TIME failed, using "C"
+4: Setting LC_MESSAGES failed, using "C"
+5: Setting LC_MONETARY failed, using "C"
+6: Setting LC_PAPER failed, using "C"
+7: Setting LC_MEASUREMENT failed, using "C"
+```
 
 ## v0.0.2
 
