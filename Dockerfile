@@ -6,7 +6,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 WORKDIR /opt/bin
 
 RUN apt update -y && \
-    apt upgrade && \
+    apt upgrade -y && \
     apt install -y dirmngr gnupg apt-transport-https ca-certificates software-properties-common wget && \
     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9 && \
     wget -O- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | gpg --dearmor | tee /usr/share/keyrings/cran.gpg && \
