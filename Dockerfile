@@ -21,10 +21,11 @@ RUN apt update -y && \
     sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && \
     locale-gen && \
     update-alternatives --install /usr/bin/python python /usr/bin/python3 1 && \
-    pip3 install jupyter==1.0.0 && \
-    pip3 install ipykernel==6.22.0 && \
+    pip3 install --upgrade pip setuptools --no-cache-dir && \
+    pip3 install jupyter==1.0.0 --no-cache-dir  && \
+    pip3 install ipykernel==6.22.0 --no-cache-dir  && \
     Rscript -e "install.packages(c('BiocManager','devtools','languageserver','IRkernel'))"  && \
-    rm -rf /tmp/*
+    rm -rf /tmp/*  /var/lib/apt/lists/* 
 
 ENV LANG en_US.UTF-8  
 ENV LANGUAGE en_US:en  
