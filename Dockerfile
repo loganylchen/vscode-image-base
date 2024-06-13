@@ -1,35 +1,53 @@
-FROM ubuntu:22.04
+FROM debian:12.5
 
 ENV PATH=/opt/bin/:$PATH
 ENV DEBIAN_FRONTEND=noninteractive
 
-WORKDIR /opt/bin
+ARG R_VERSION=4.1.2
+ARG PYTHON_VERSION=3.10
 
-RUN apt update -y && \
+WORKDIR /tmp
+
+RUN apt update && \
     apt upgrade -y && \
-    apt install -y dirmngr gnupg apt-transport-https ca-certificates software-properties-common wget && \
-    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9 && \
-    wget -O- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | gpg --dearmor | tee /usr/share/keyrings/cran.gpg && \
-    echo deb [signed-by=/usr/share/keyrings/cran.gpg] https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/ | tee /etc/apt/sources.list.d/cran.list && \
-    apt update && \
-    apt install -y \
-    locales python3 python3-dev python3-pip \
-    r-base libcurl4-openssl-dev libssl-dev curl wget libpoppler-cpp-dev  libgsl-dev \
-    libxml2-dev libproj-dev libfontconfig1-dev git liblz4-dev libzstd-dev libavfilter-dev libwebp-dev libtesseract-dev libleptonica-dev cargo \
-    libmagick++-dev libhdf5-dev libfftw3-dev tesseract-ocr-eng \
-    libharfbuzz-dev libfribidi-dev build-essential cmake && \
-    sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && \
-    locale-gen && \
-    update-alternatives --install /usr/bin/python python /usr/bin/python3 1 && \
-    pip3 install --upgrade pip setuptools --no-cache-dir && \
-    pip3 install jupyter==1.0.0 --no-cache-dir  && \
-    pip3 install ipykernel==6.22.0 --no-cache-dir  && \
-    Rscript -e "install.packages(c('BiocManager','devtools','languageserver','IRkernel'))"  && \
-    rm -rf /tmp/*  /var/lib/apt/lists/* 
+    apt install -y wget build-essential && \
+    wget https://cloud.r-project.org/src/base/R-4/R-${R_VERSION}.tar.gz && \
+    tar -xvf R-${R_VERSION}.tar.gz && \
+    cd R-${R_VERSION} && \
+    ./configure --prefix=/opt/bin/ --enable-R-shlib --with-blas --with-lapack && \
+    make && \
+    make install     
 
-ENV LANG en_US.UTF-8  
-ENV LANGUAGE en_US:en  
-ENV LC_ALL en_US.UTF-8 
+
+
+
+# WORKDIR /opt/bin
+
+# RUN apt update -y && \
+#     apt upgrade -y && \
+#     apt install -y dirmngr gnupg apt-transport-https ca-certificates software-properties-common wget && \
+#     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9 && \
+#     wget -O- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | gpg --dearmor | tee /usr/share/keyrings/cran.gpg && \
+#     echo deb [signed-by=/usr/share/keyrings/cran.gpg] https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/ | tee /etc/apt/sources.list.d/cran.list && \
+#     apt update && \
+#     apt install -y \
+#     locales python3 python3-dev python3-pip \
+#     r-base libcurl4-openssl-dev libssl-dev curl wget libpoppler-cpp-dev  libgsl-dev \
+#     libxml2-dev libproj-dev libfontconfig1-dev git liblz4-dev libzstd-dev libavfilter-dev libwebp-dev libtesseract-dev libleptonica-dev cargo \
+#     libmagick++-dev libhdf5-dev libfftw3-dev tesseract-ocr-eng \
+#     libharfbuzz-dev libfribidi-dev build-essential cmake && \
+#     sed -i '/en_US.UTF-8/s/^# //g' /etc/locale.gen && \
+#     locale-gen && \
+#     update-alternatives --install /usr/bin/python python /usr/bin/python3 1 && \
+#     pip3 install --upgrade pip setuptools --no-cache-dir && \
+#     pip3 install jupyter==1.0.0 --no-cache-dir  && \
+#     pip3 install ipykernel==6.22.0 --no-cache-dir  && \
+#     Rscript -e "install.packages(c('BiocManager','devtools','languageserver','IRkernel'))"  && \
+#     rm -rf /tmp/*  /var/lib/apt/lists/* 
+
+# ENV LANG en_US.UTF-8  
+# ENV LANGUAGE en_US:en  
+# ENV LC_ALL en_US.UTF-8 
 
 
 
