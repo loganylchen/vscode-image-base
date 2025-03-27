@@ -4,6 +4,7 @@ ENV PATH=/opt/bin/:$PATH
 ENV DEBIAN_FRONTEND=noninteractive
 
 WORKDIR /opt/bin
+SHELL ["/bin/bash", "-o", "errexit", "-c"]
 
 RUN apt update -y && \
     apt upgrade -y && \
