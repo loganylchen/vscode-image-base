@@ -25,7 +25,14 @@ RUN apt update -y && \
     pip3 install --upgrade pip setuptools --no-cache-dir && \
     pip3 install jupyter==1.0.0 --no-cache-dir  && \
     pip3 install ipykernel==6.22.0 --no-cache-dir  && \
-    Rscript -e "install.packages(c('BiocManager','devtools','languageserver','IRkernel'))"  && \
+    Rscript -e "setRepositories(ind = 1:3, addURLs = c('https://satijalab.r-universe.dev', 'https://bnprks.r-universe.dev/')); \
+    install.packages(c('BiocManager','devtools','languageserver','IRkernel','Seurat', 'circlize', \
+    'gridExtra', 'statmod', 'ggalt', 'magick', 'sctransform', 'Rcpp', 'ggpubr', 'SoupX', 'metap',\
+    'glmnet','RCircos','magrittr','stringr','ggplot2','pROC','igraph','RColorBrewer',\
+    'BPCells', 'presto', 'glmGamPoi', 'Signac',\
+    'MetBrewer','VennDiagram','ggalluvial', 'pheatmap','ggExtra', 'foreach','doParallel','do'))"  && \
+    Rscript -e "BiocManager::install(c('edgeR', 'DESeq2','limma','PCAtools','MAST','org.Hs.eg.db', 'dittoSeq',\
+    'scater', 'glmGamPoi', 'multtest', 'clusterProfiler', 'glmGamPoi', 'ComplexHeatmap'))" && \
     rm -rf /tmp/*  /var/lib/apt/lists/* 
 
 ENV LANG en_US.UTF-8  
