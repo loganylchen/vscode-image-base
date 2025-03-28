@@ -4,10 +4,11 @@ ENV PATH=/opt/bin/:$PATH
 ENV DEBIAN_FRONTEND=noninteractive
 
 WORKDIR /opt/bin
+SHELL ["/bin/bash", "-o", "errexit", "-c"]
 
 RUN apt update -y && \
     apt upgrade -y && \
-    apt install -y dirmngr gnupg apt-transport-https ca-certificates software-properties-common wget && \
+    apt install -y dirmngr gnupg apt-transport-https ca-certificates software-properties-common wget libgit2-dev && \
     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9 && \
     wget -O- https://cloud.r-project.org/bin/linux/ubuntu/marutter_pubkey.asc | gpg --dearmor | tee /usr/share/keyrings/cran.gpg && \
     echo deb [signed-by=/usr/share/keyrings/cran.gpg] https://cloud.r-project.org/bin/linux/ubuntu $(lsb_release -cs)-cran40/ | tee /etc/apt/sources.list.d/cran.list && \

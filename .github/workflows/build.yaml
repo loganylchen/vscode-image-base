@@ -1,4 +1,4 @@
-name: image build for vscode base
+name: image build for vscode base 
 
 on:
   push:
@@ -35,9 +35,12 @@ jobs:
           username: ${{ secrets.DH_USER }}
           password: ${{ secrets.DH_TOKEN }}
       - name: Build and push
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v6
         with:
           context: ./
+          platforms: linux/arm64,linux/amd64
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=registry,ref=${{ secrets.DH_USER }}/vscode-base:cache
+          cache-to: type=registry,ref=${{ secrets.DH_USER }}/vscode-base:cache,mode=max    
