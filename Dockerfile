@@ -28,8 +28,8 @@ RUN apt update -y && \
     Rscript -e "setRepositories(ind = 1:3, addURLs = c('https://satijalab.r-universe.dev', 'https://bnprks.r-universe.dev/')); \
     install.packages(c('BiocManager','devtools','languageserver','IRkernel', 'circlize', \
     'gridExtra', 'statmod', 'ggalt', 'magick',  'Rcpp', 'ggpubr',  'metap',\
-    'glmnet','RCircos','magrittr','stringr','ggplot2','pROC','igraph','RColorBrewer',\
-    'BPCells', 'glmGamPoi', 'MetBrewer','VennDiagram','ggalluvial', 'pheatmap','ggExtra', 'foreach','doParallel','do'))"  && \
+    'stringr','ggplot2','pROC','igraph','RColorBrewer',\
+    'MetBrewer','VennDiagram','ggalluvial', 'pheatmap','ggExtra', 'foreach','doParallel','do'))"  && \
     Rscript -e "BiocManager::install(c('edgeR', 'DESeq2','limma','PCAtools','MAST','org.Hs.eg.db', 'dittoSeq',\
     'scater',  'multtest', 'clusterProfiler', 'ComplexHeatmap'))" && \
     rm -rf /tmp/*  /var/lib/apt/lists/* 
