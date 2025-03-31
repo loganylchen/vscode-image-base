@@ -32,8 +32,7 @@ ENV LC_ALL=en_US.UTF-8
 RUN pip3 install --upgrade pip setuptools --no-cache-dir && \
     pip3 install jupyter==1.0.0 --no-cache-dir  && \
     pip3 install ipykernel==6.22.0 --no-cache-dir  && \
-    Rscript -e "install.packages(c('BiocManager','devtools','languageserver','IRkernel', 'ggpubr', 'pheatmap'))"  && \
-    Rscript -e "BiocManager::install(c('edgeR', 'DESeq2','limma','PCAtools','MAST','org.Hs.eg.db', 'dittoSeq','multtest', 'clusterProfiler', 'ComplexHeatmap'))" && \
+    Rscript -e "install.packages(c('BiocManager','devtools','languageserver','IRkernel'))"  && \
     rm -rf /tmp/*  /var/lib/apt/lists/* 
 
 
