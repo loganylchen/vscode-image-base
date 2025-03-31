@@ -23,6 +23,11 @@ RUN apt update -y && \
     locale-gen && \
     update-alternatives --install /usr/bin/python python /usr/bin/python3 1
 
+ENV LANG=en_US.UTF-8  
+ENV LANGUAGE=en_US:en  
+ENV LC_ALL=en_US.UTF-8 
+
+
 RUN pip3 install --upgrade pip setuptools --no-cache-dir && \
     pip3 install jupyter==1.0.0 --no-cache-dir  && \
     pip3 install ipykernel==6.22.0 --no-cache-dir  && \
@@ -30,9 +35,7 @@ RUN pip3 install --upgrade pip setuptools --no-cache-dir && \
     Rscript -e "BiocManager::install(c('edgeR', 'DESeq2','limma','PCAtools','MAST','org.Hs.eg.db', 'dittoSeq','multtest', 'clusterProfiler', 'ComplexHeatmap'))" && \
     rm -rf /tmp/*  /var/lib/apt/lists/* 
 
-ENV LANG=en_US.UTF-8  
-ENV LANGUAGE=en_US:en  
-ENV LC_ALL=en_US.UTF-8 
+
 
 
 
