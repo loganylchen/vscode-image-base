@@ -29,9 +29,9 @@ RUN apt update -y && \
     Rscript -e "BiocManager::install(c('edgeR', 'DESeq2','limma','PCAtools','MAST','org.Hs.eg.db', 'dittoSeq','multtest', 'clusterProfiler', 'ComplexHeatmap'))" && \
     rm -rf /tmp/*  /var/lib/apt/lists/* 
 
-ENV LANG en_US.UTF-8  
-ENV LANGUAGE en_US:en  
-ENV LC_ALL en_US.UTF-8 
+ENV LANG=en_US.UTF-8  
+ENV LANGUAGE=en_US:en  
+ENV LC_ALL=en_US.UTF-8 
 
 
 
